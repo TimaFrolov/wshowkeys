@@ -3,9 +3,9 @@
 Displays keypresses on screen on supported Wayland compositors (requires
 `wlr_layer_shell_v1` support).
 
-![](https://sr.ht/xGs2.png)
+![GIF Demo](./helloworld.gif)
 
-Forked from https://git.sr.ht/~sircmpwn/wshowkeys as Drew has moved onto other thigns.
+Forked from https://git.sr.ht/~sircmpwn/wshowkeys as Drew has moved onto other things. And then forked from https://github.com/ammgws/wshowkeys/ to make cosmetic changes.
 
 ## Installation
 
@@ -30,6 +30,7 @@ permissions to read input events. These permissions are dropped after startup.
 
 ## Usage
 
+> A [Nerd Font](https://www.nerdfonts.com/) is recommended for the best results.
 ```
 wshowkeys [-b|-f|-s #RRGGBB[AA]] [-F font] [-t timeout]
     [-a top|left|right|bottom] [-m margin] [-o output]
