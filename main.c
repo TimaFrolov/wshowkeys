@@ -104,10 +104,8 @@ static void render_to_cairo(cairo_t *cairo, struct wsk_state *state,
 
 	struct wsk_keypress *key = state->keys;
 	while (key) {
-		bool special = false;
 		const char *name = key->utf8;
 		if (!name[0]) {
-			special = true;
 			cairo_set_source_u32(cairo, state->specialfg);
 			if (strcmp(key->name, "Return") == 0) {
 				name = "⏎";
@@ -117,15 +115,14 @@ static void render_to_cairo(cairo_t *cairo, struct wsk_state *state,
 				name = "⌫"; 
 			} else if (strcmp(key->name, "space") == 0) {
 				name = "␣";
-				special = false;
 			} else if (strcmp(key->name, "Control_L") == 0 || strcmp(key->name, "Control_R") == 0) {
-				name = "Ctrl";
+				name = "^";
 			} else if (strcmp(key->name, "Alt_L") == 0 || strcmp(key->name, "Alt_R") == 0) {
-				name = "Alt";
+				name = "⎇";
 			} else if (strcmp(key->name, "Shift_L") == 0 || strcmp(key->name, "Shift_R") == 0) {
 				name = "⇧";
 			} else if (strcmp(key->name, "Super_L") == 0) {
-				name = "";
+				name = "❖";
 			} else if (strcmp(key->name, "Caps_Lock") == 0) {
 				name = "⇪";
 			} else if (strcmp(key->name, "Escape") == 0) {
@@ -156,13 +153,8 @@ static void render_to_cairo(cairo_t *cairo, struct wsk_state *state,
 		cairo_move_to(cairo, *width, 0);
 
 		int w, h;
-		if (special) {
-			get_text_size(cairo, state->font, &w, &h, NULL, scale, "%s ", name);
-			pango_printf(cairo, state->font, scale,  "%s ", name);
-		} else {
-			get_text_size(cairo, state->font, &w, &h, NULL, scale, "%s", name);
-			pango_printf(cairo, state->font, scale,  "%s", name);
-		}
+		get_text_size(cairo, state->font, &w, &h, NULL, scale, "%s", name);
+		pango_printf(cairo, state->font, scale,  "%s", name);
 
 		*width = *width + w;
 		if ((int)*height < h) {
